@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     float stonehenge = 0;
     float obelisk = 0;
     float sundail = 0;
+    float time = 0;
     float moyai = 0;
     void Start()
     {
@@ -32,7 +33,14 @@ public class GameManager : MonoBehaviour
         WoodProductions();
         StoneProduction();
         SpiritProduction();
+
+        time += Time.deltaTime;
+        if (time > 600)
+        {
+            ResetProgress();
+        }
     }
+    #region Production
     void AnkhProduction()
     {
         ankh += (pyramid / 100) * Time.deltaTime;
@@ -53,6 +61,8 @@ public class GameManager : MonoBehaviour
     {
         prestige += wood / 1000 + stone / 1000 + ankh / 100 + spirit / 100;
     }
+    #endregion
+    #region TryBuy
     public void TryBuyPyramid()
     {
         if (stone > GetCost(pyramid, 1.4f, 500))
@@ -75,5 +85,26 @@ public class GameManager : MonoBehaviour
             if (wood > GetCost(obelisk, 1.6f, 1000))
                 if (stone > GetCost(obelisk, 1.6f, 1000))
                     obelisk++;
+    }
+    public void TryBuySundial()
+    {
+        if (wood > GetCost(sundail, 1.3f, 250))
+            if (stone > GetCost(sundail, 1.3f, 250))
+            {
+                sundail++;
+                time -= 30;
+            }
+    }
+    #endregion
+    public void ResetProgress()
+    {
+        wood = 0;
+        stone = 0;
+        ankh = 0;
+        spirit = 0;
+        totem = 0;
+        stonehenge = 0;
+        obelisk = 0;
+        Prestige();
     }
 }
