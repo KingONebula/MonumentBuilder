@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     }
     public float GetCost(float currentAmount, float ramp, float baseCost)
     {
-        return currentAmount * baseCost * Mathf.Pow(ramp, baseCost);
+        return currentAmount * baseCost * Mathf.Pow(ramp, currentAmount);
     }
     // Update is called once per frame
     void Update()
@@ -52,5 +52,28 @@ public class GameManager : MonoBehaviour
     public void Prestige()
     {
         prestige += wood / 1000 + stone / 1000 + ankh / 100 + spirit / 100;
+    }
+    public void TryBuyPyramid()
+    {
+        if (stone > GetCost(pyramid, 1.4f, 500))
+            if (wood > GetCost(pyramid, 1.4f, 500))
+                pyramid++;
+    }
+    public void TryBuyTotem()
+    {
+        if (wood > GetCost(totem, 1.1f, 10))
+            totem++;
+    }
+    public void TryBuyStoneHenge()
+    {
+        if (stone > GetCost(stonehenge, 1.1f, 10))
+            totem++;
+    }
+    public void TryBuyObelisk()
+    {
+        if (ankh > GetCost(obelisk, 1.6f, 2))
+            if (wood > GetCost(obelisk, 1.6f, 1000))
+                if (stone > GetCost(obelisk, 1.6f, 1000))
+                    obelisk++;
     }
 }
