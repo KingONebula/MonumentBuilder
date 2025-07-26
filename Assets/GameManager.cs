@@ -3,19 +3,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //Managers
+    [SerializeField]
+    UIManager uiManager;
+    [SerializeField] MonumentManager monumentManager;
     //Resources
     float ankh = 0;
     float wood = 0;
     float stone = 0;
     float spirit = 0;
     float prestige = 0;
+    float time = 0;
     //Monuments
     float pyramid = 0;
     float totem = 0;
     float stonehenge = 0;
     float obelisk = 0;
     float sundail = 0;
-    float time = 0;
     float moyai = 0;
     void Start()
     {
@@ -23,7 +27,7 @@ public class GameManager : MonoBehaviour
     }
     public float GetCost(float currentAmount, float ramp, float baseCost)
     {
-        return currentAmount * baseCost * Mathf.Pow(ramp, currentAmount);
+        return (currentAmount+1) * baseCost * Mathf.Pow(ramp, currentAmount);
     }
     // Update is called once per frame
     void Update()
@@ -33,6 +37,7 @@ public class GameManager : MonoBehaviour
         WoodProductions();
         StoneProduction();
         SpiritProduction();
+        uiManager.UpdateResources(ankh, wood, stone, spirit, prestige);
 
         time += Time.deltaTime;
         if (time > 600)
@@ -67,30 +72,49 @@ public class GameManager : MonoBehaviour
     {
         if (stone > GetCost(pyramid, 1.4f, 500))
             if (wood > GetCost(pyramid, 1.4f, 500))
+            {
+                if (pyramid == 0)
+                    monumentManager.OnPyramidBuild();
                 pyramid++;
+            }
+                
     }
     public void TryBuyTotem()
     {
         if (wood > GetCost(totem, 1.1f, 10))
-            totem++;
+        {
+            if (totem == 0)
+                monumentManager.OnTotemBuild();
+            totem++;   
+        }
     }
-    public void TryBuyStoneHenge()
+    public void TryBuyStonehenge()
     {
         if (stone > GetCost(stonehenge, 1.1f, 10))
+        {
+            if (stonehenge == 0)
+                monumentManager.OnStoneHengeBuild();
             totem++;
+        }
     }
     public void TryBuyObelisk()
     {
         if (ankh > GetCost(obelisk, 1.6f, 2))
             if (wood > GetCost(obelisk, 1.6f, 1000))
                 if (stone > GetCost(obelisk, 1.6f, 1000))
+                {
+                    if (obelisk == 0)
+                        monumentManager.OnObeliskBuild();
                     obelisk++;
+                }
     }
     public void TryBuySundial()
     {
         if (wood > GetCost(sundail, 1.3f, 250))
             if (stone > GetCost(sundail, 1.3f, 250))
             {
+                if (sundail == 0)
+                    monumentManager.OnSundialBuild();
                 sundail++;
                 time -= 30;
             }
