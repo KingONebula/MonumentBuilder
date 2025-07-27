@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     //Monuments
     float pyramid = 0;
     float totem = 0;
+    float totemupgrade1 = 0, totemupgrade2 = 0, totemupgrade3 = 0;
     float stonehenge = 0;
     float obelisk = 0;
     float sundial = 0;
@@ -28,6 +29,14 @@ public class GameManager : MonoBehaviour
     public float GetCost(float currentAmount, float ramp, float baseCost)
     {
         return (currentAmount+1) * baseCost * Mathf.Pow(ramp, currentAmount);
+    }
+    public float RollCritChance(float level)
+    {
+        if (UnityEngine.Random.value < level / 100f)
+        {
+            return 1.5f;
+        }
+        return 1;
     }
     // Update is called once per frame
     void Update()
@@ -49,7 +58,7 @@ public class GameManager : MonoBehaviour
     #region Production
     public void GatherWood()
     {
-        wood += totem + 1;
+        wood += (totemupgrade1 + 1) * ( totem + 1 ) *  RollCritChance(totemupgrade3);
     }
     public void GatherStone()
     {
@@ -61,7 +70,7 @@ public class GameManager : MonoBehaviour
     }
     void WoodProductions()
     {
-        wood += ((totem * (spirit+1) + stonehenge / 4) * prestige * (1 + ankh)) * Time.deltaTime;
+        wood += totem * totemupgrade2/2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
     }
     void StoneProduction()
     {
@@ -90,16 +99,45 @@ public class GameManager : MonoBehaviour
             }
                 
     }
+    #region Totem
     public void TryBuyTotem()
     {
-        if (wood >= GetCost(totem, 1.1f, 10))
+        if (wood >= GetCost(totem, 2f, 10))
         {
             if (totem == 0)
                 monumentManager.OnTotemBuild();
-            wood -= GetCost(totem, 1.1f, 10);
+            wood -= GetCost(totem, 2f, 10);
             totem++;
         }
     }
+    //Clicker Improve
+    public void TryBuyTotemUpgrade1()
+    {
+        if (wood >= GetCost(totemupgrade1, 1.1f, 10))
+        {
+            wood -= GetCost(totemupgrade1, 1.1f, 10);
+            totemupgrade1++;
+        }
+    }
+    //Auto Clicker
+    public void TryBuyTotemUpgrade2()
+    {
+        if (wood >= GetCost(totemupgrade2, 1.3f, 50))
+        {
+            wood -= GetCost(totemupgrade2, 1.3f, 50);
+            totemupgrade2++;
+        }
+    }
+    //Crit Chance
+    public void TryBuyTotemUpgrade3()
+    {
+        if (wood >= GetCost(totemupgrade3, 1.6f, 100))
+        {
+            wood -= GetCost(totemupgrade3, 1.6f, 100);
+            totemupgrade3++;
+        }
+    }
+    #endregion
     public void TryBuyStonehenge()
     {
         if (stone >= GetCost(stonehenge, 1.1f, 10))
