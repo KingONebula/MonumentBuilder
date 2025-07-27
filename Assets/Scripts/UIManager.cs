@@ -23,39 +23,41 @@ public class UIManager : MonoBehaviour
 
     public void UpdateResources(float ankhAmount, float woodAmount, float stoneAmount, float spiritAmount, float prestigeAmount)
     {
-        double roundVal = Math.Round(ankhAmount, 2);
-        AnkhAmount_TXT.text = roundVal.ToString();
+        int fontSize;
+        AnkhAmount_TXT.text = NumberConverter.ConvertFloat(ankhAmount, out fontSize);
+        AnkhAmount_TXT.fontSize = fontSize;
 
-        roundVal = Math.Round(woodAmount, 2);
-        WoodAmount_TXT.text = roundVal.ToString();
+        WoodAmount_TXT.text = NumberConverter.ConvertFloat(woodAmount, out fontSize);
+        WoodAmount_TXT.fontSize = fontSize;
 
-        roundVal = Math.Round(stoneAmount, 2);
-        StoneAmount_TXT.text = roundVal.ToString();
+        StoneAmount_TXT.text = NumberConverter.ConvertFloat(stoneAmount, out fontSize);
+        StoneAmount_TXT.fontSize = fontSize;
 
-        roundVal = Math.Round(spiritAmount, 2);
-        SpiritAmount_TXT.text = roundVal.ToString();
+        SpiritAmount_TXT.text = NumberConverter.ConvertFloat(spiritAmount, out fontSize);
+        SpiritAmount_TXT.fontSize = fontSize;
 
-        roundVal = Math.Round(prestigeAmount, 2);
-        PrestigeAmount_TXT.text = roundVal.ToString();
+        PrestigeAmount_TXT.text = NumberConverter.ConvertFloat(prestigeAmount, out fontSize);
+        PrestigeAmount_TXT.fontSize = fontSize;
     }
 
     public void UpdateGatherAmounts(float totem, float stonehenge, float pyramid, float obelisk, float sundial)
     {
-        GatherWood_TXT.text = (totem + 1).ToString();
-        GatherStone_TXT.text = (stonehenge + 1).ToString();
+        int fontSize;
+        GatherWood_TXT.text = NumberConverter.ConvertFloat(totem + 1, out fontSize);
+        GatherStone_TXT.text = NumberConverter.ConvertFloat(stonehenge + 1, out fontSize);
 
-        BuildPyramid_TXT.text = "Wood: " + GameManager.GetCost(pyramid, 1.4f, 500);
-        BuildPyramid_TXT.text += " | Stone: " + GameManager.GetCost(pyramid, 1.4f, 500);
+        BuildPyramid_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(pyramid, 1.4f, 500), out fontSize);
+        BuildPyramid_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(pyramid, 1.4f, 500), out fontSize);
 
-        BuildTotem_TXT.text = "Wood: " + GameManager.GetCost(totem, 1.1f, 10);
+        BuildTotem_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(totem, 1.1f, 10), out fontSize);
 
-        BuildStonehenge_TXT.text = "Stone: " + GameManager.GetCost(stonehenge, 1.1f, 10);
+        BuildStonehenge_TXT.text = "Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(stonehenge, 1.1f, 10), out fontSize);
 
-        BuildObelisk_TXT.text = "Ankh: " + GameManager.GetCost(obelisk, 1.6f, 2);
-        BuildObelisk_TXT.text += " | Wood: " + GameManager.GetCost(obelisk, 1.6f, 1000);
-        BuildObelisk_TXT.text += " | Stone: " + GameManager.GetCost(obelisk, 1.6f, 1000);
+        BuildObelisk_TXT.text = "Ankh: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 2), out fontSize);
+        BuildObelisk_TXT.text += " | Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
+        BuildObelisk_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
 
-        BuildSunDial_TXT.text = "Wood: " + GameManager.GetCost(sundial, 1.3f, 250);
-        BuildSunDial_TXT.text += " | Stone: " + GameManager.GetCost(sundial, 1.3f, 250);
+        BuildSunDial_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(sundial, 1.3f, 250), out fontSize);
+        BuildSunDial_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(sundial, 1.3f, 250), out fontSize);
     }
 }
