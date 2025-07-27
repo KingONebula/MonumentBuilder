@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     }
     void StoneProduction()
     {
-        stone += stone / 2 * stonehengeupgrade2 * RollCritChance(stonehengeupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
+        stone += stonehenge / 2 * stonehengeupgrade2 * RollCritChance(stonehengeupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
     }
     void SpiritProduction()
     {
@@ -83,13 +83,13 @@ public class GameManager : MonoBehaviour
     }
     public void Prestige()
     {
-        prestige += wood / 10000 + stone / 10000 + ankh / 100 + spirit / 100;
+        prestige += wood / 10000 + stone / 1000 + ankh / 100 + spirit / 100;
     }
     #endregion
     #region TryBuy
     public void TryBuyPyramid()
     {
-        if (stone >= GetCost(pyramid, 1.4f, 500))
+        if (stone >= GetCost(pyramid, 1.4f, 250))
             if (wood >= GetCost(pyramid, 1.4f, 500))
             {
                 if (pyramid == 0)
