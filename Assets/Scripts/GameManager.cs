@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     float totem = 0;
     float totemupgrade1 = 0, totemupgrade2 = 0, totemupgrade3 = 0;
     float stonehenge = 0;
+    float stonehengeupgrade1 = 0, stonehengeupgrade2 = 0, stonehengeupgrade3 = 0;
     float obelisk = 0;
     float sundial = 0;
     float moyai = 0;
@@ -58,11 +59,11 @@ public class GameManager : MonoBehaviour
     #region Production
     public void GatherWood()
     {
-        wood += (totemupgrade1 + 1) * ( totem + 1 ) *  RollCritChance(totemupgrade3);
+        wood += (totemupgrade1 + 1) / 2 * ( totem + 1 ) *  RollCritChance(totemupgrade3);
     }
     public void GatherStone()
     {
-        stone += stonehenge + 1;
+        stone += (stonehengeupgrade1 + 1) / 4 * (stonehenge + 1) * RollCritChance(stonehengeupgrade3);
     }
     void AnkhProduction()
     {
@@ -70,11 +71,11 @@ public class GameManager : MonoBehaviour
     }
     void WoodProductions()
     {
-        wood += totem * totemupgrade2/2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
+        wood += totem * totemupgrade2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
     }
     void StoneProduction()
     {
-        stone += ((stonehenge * (spirit+1) + totem / 4) * prestige * (1 + ankh)) * Time.deltaTime;
+        stone += stone / 2 * stonehengeupgrade2 * RollCritChance(stonehengeupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
     }
     void SpiritProduction()
     {
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
     }
     public void Prestige()
     {
-        prestige += wood / 1000 + stone / 1000 + ankh / 100 + spirit / 100;
+        prestige += wood / 10000 + stone / 10000 + ankh / 100 + spirit / 100;
     }
     #endregion
     #region TryBuy
@@ -138,16 +139,42 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+    #region Stonehenge
     public void TryBuyStonehenge()
     {
-        if (stone >= GetCost(stonehenge, 1.1f, 10))
+        if (stone >= GetCost(stonehenge, 2f, 10))
         {
             if (stonehenge == 0)
                 monumentManager.OnStoneHengeBuild();
-            stone -= GetCost(stonehenge, 1.1f, 10);
+            stone -= GetCost(stonehenge, 2f, 10);
             stonehenge++;
         }
     }
+    public void TryBuyStonehengeUpgrade1()
+    {
+        if (stone >= GetCost(stonehengeupgrade1, 1.1f, 20))
+        {
+            stone -= GetCost(stonehengeupgrade1, 1.1f, 20);
+            stonehengeupgrade1++;
+        }
+    }
+    public void TryBuyStonehengeUpgrade2()
+    {
+        if (stone >= GetCost(stonehengeupgrade2, 1.3f, 60))
+        {
+            stone -= GetCost(stonehengeupgrade2, 1.3f, 60);
+            stonehengeupgrade2++;
+        }
+    }
+    public void TryBuyStonehengeUpgrade3()
+    {
+        if (stone >= GetCost(stonehengeupgrade3, 1.6f, 150))
+        {
+            stone -= GetCost(stonehengeupgrade3, 1.6f, 150);
+            stonehengeupgrade3++;
+        }
+    }
+    #endregion
     public void TryBuyObelisk()
     {
         if (ankh >= GetCost(obelisk, 1.6f, 2))
