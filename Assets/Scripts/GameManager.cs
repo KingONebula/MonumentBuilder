@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     float totem = 0;
     float stonehenge = 0;
     float obelisk = 0;
-    float sundail = 0;
+    float sundial = 0;
     float moyai = 0;
     void Start()
     {
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         StoneProduction();
         SpiritProduction();
         uiManager.UpdateResources(ankh, wood, stone, spirit, prestige);
+        uiManager.UpdateGatherAmounts(totem,stonehenge,pyramid, obelisk, sundial);
 
         time += Time.deltaTime;
         if (time > 600)
@@ -125,15 +126,15 @@ public class GameManager : MonoBehaviour
     }
     public void TryBuySundial()
     {
-        if (wood >= GetCost(sundail, 1.3f, 250))
-            if (stone >= GetCost(sundail, 1.3f, 250))
+        if (wood >= GetCost(sundial, 1.3f, 250))
+            if (stone >= GetCost(sundial, 1.3f, 250))
             {
-                if (sundail == 0)
+                if (sundial == 0)
                     monumentManager.OnSundialBuild();
                 time -= 30;
-                wood -= GetCost(sundail, 1.3f, 250);
-                stone -= GetCost(sundail, 1.3f, 250);
-                sundail++;
+                wood -= GetCost(sundial, 1.3f, 250);
+                stone -= GetCost(sundial, 1.3f, 250);
+                sundial++;
             }
     }
     #endregion
