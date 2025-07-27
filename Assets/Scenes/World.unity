@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!95 &32763727 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 616293343520078834, guid: 9a2c096ffb02c6849bb59b9e4e8e7b29, type: 3}
+  m_PrefabInstance: {fileID: 4470288271312225386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &39771327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,11 +2294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6a3ca777c7e98418e90cf68f37d07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pyramid_anim: {fileID: 0}
+  pyramid_anim: {fileID: 831124757}
   totem_anim: {fileID: 3634135419449182033}
   stonehenge_anim: {fileID: 2125532579448140569}
-  obelisk_anim: {fileID: 0}
-  sundial_anim: {fileID: 0}
+  obelisk_anim: {fileID: 32763727}
+  sundial_anim: {fileID: 2126214710}
 --- !u!1 &749164750 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: af8af76825570ba439bff9281efba2e1, type: 3}
@@ -5836,6 +5841,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123672189}
   m_CullTransparentMesh: 1
+--- !u!95 &2126214710 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8441244851955932505, guid: 36d17203699d51a4686ab2ebb201f338, type: 3}
+  m_PrefabInstance: {fileID: 3712218638173538078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2136336051
 GameObject:
   m_ObjectHideFlags: 0
