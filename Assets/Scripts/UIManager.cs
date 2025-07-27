@@ -47,17 +47,17 @@ public class UIManager : MonoBehaviour
         GatherStone_TXT.text = NumberConverter.ConvertFloat(stonehenge + 1, out fontSize);
 
         BuildPyramid_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(pyramid, 1.4f, 500), out fontSize);
-        BuildPyramid_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(pyramid, 1.4f, 500), out fontSize);
+        BuildPyramid_TXT.text += "\nStone: " + NumberConverter.ConvertFloat(GameManager.GetCost(pyramid, 1.4f, 500), out fontSize);
 
         BuildTotem_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(totem, 1.1f, 10), out fontSize);
 
         BuildStonehenge_TXT.text = "Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(stonehenge, 1.1f, 10), out fontSize);
 
         BuildObelisk_TXT.text = "Ankh: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 2), out fontSize);
-        BuildObelisk_TXT.text += " | Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
-        BuildObelisk_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
+        BuildObelisk_TXT.text += "\nWood: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
+        BuildObelisk_TXT.text += "\nStone: " + NumberConverter.ConvertFloat(GameManager.GetCost(obelisk, 1.6f, 1000), out fontSize);
 
         BuildSunDial_TXT.text = "Wood: " + NumberConverter.ConvertFloat(GameManager.GetCost(sundial, 1.3f, 250), out fontSize);
-        BuildSunDial_TXT.text += " | Stone: " + NumberConverter.ConvertFloat(GameManager.GetCost(sundial, 1.3f, 250), out fontSize);
+        BuildSunDial_TXT.text += "\nStone: " + NumberConverter.ConvertFloat(GameManager.GetCost(sundial, 1.3f, 250), out fontSize);
     }
 }
