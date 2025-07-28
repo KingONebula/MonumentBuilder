@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     UIManager uiManager;
     [SerializeField] MonumentManager monumentManager;
+    [SerializeField] MilestoneManager milestoneManager;
     //Resources
     float ankh = 0;
     float wood = 0;
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
     }
     public float GetCost(float currentAmount, float ramp, float baseCost)
     {
-        return (currentAmount+1) * baseCost * Mathf.Pow(ramp, currentAmount);
+        return (currentAmount + 1) * baseCost * Mathf.Pow(ramp, currentAmount);
     }
     public float RollCritChance(float level)
     {
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
     #region Production
     public void GatherWood()
     {
-        wood += (totemupgrade1 + 1) / 2 * ( totem + 1 ) *  RollCritChance(totemupgrade3);
+        wood += (totemupgrade1 + 1) / 2 * (totem + 1) * RollCritChance(totemupgrade3);
     }
     public void GatherStone()
     {
@@ -71,11 +72,11 @@ public class GameManager : MonoBehaviour
     }
     void WoodProductions()
     {
-        wood += totem * totemupgrade2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
+        wood += totem * totemupgrade2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh) / 2 * Time.deltaTime;
     }
     void StoneProduction()
     {
-        stone += stonehenge / 2 * stonehengeupgrade2 * RollCritChance(stonehengeupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
+        stone += stonehenge / 2 * stonehengeupgrade2 * RollCritChance(stonehengeupgrade3) * prestige * (1 + ankh) / 2 * Time.deltaTime;
     }
     void SpiritProduction()
     {
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
                 wood -= GetCost(pyramid, 1.4f, 500);
                 pyramid++;
             }
-                
+
     }
     #region Totem
     public void TryBuyTotem()
@@ -211,6 +212,7 @@ public class GameManager : MonoBehaviour
     #endregion
     public void ResetProgress()
     {
+
         Prestige();
         uiManager.ActiveStonehengeUpgrades(false);
         uiManager.ActiveTotemUpgrades(false);
@@ -219,10 +221,18 @@ public class GameManager : MonoBehaviour
         ankh = 0;
         spirit = 0;
         totem = 0;
+        totemupgrade1 = 0;
+        totemupgrade2 = 0;
+        totemupgrade3 = 0;
         stonehenge = 0;
+        totemupgrade1 = 0;
+        totemupgrade2 = 0;
+        totemupgrade3 = 0;
         obelisk = 0;
         pyramid = 0;
         time = 0;
         monumentManager.OnResetProgress();
+        milestoneManager.CheckMilestone();
     }
+
 }
