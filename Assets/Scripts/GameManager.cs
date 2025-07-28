@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         StoneProduction();
         SpiritProduction();
         uiManager.UpdateResources(ankh, wood, stone, spirit, prestige);
-        uiManager.UpdateGatherAmounts(totem,stonehenge,pyramid, obelisk, sundial);
+        uiManager.UpdateGatherAmounts(totem, totemupgrade1, totemupgrade2, totemupgrade3, stonehenge, stonehengeupgrade1, stonehengeupgrade2, stonehengeupgrade3, pyramid, obelisk, sundial);
 
         time += Time.deltaTime;
         if (time > 600)
