@@ -5,6 +5,8 @@ using System;
 public class UIManager : MonoBehaviour
 {
     public GameManager GameManager;
+    public GameObject TotemUpgradeTab;
+    public GameObject StonehengeUpgradeTab;
     //Resource Amounts
     public TMP_Text AnkhAmount_TXT;
     public TMP_Text WoodAmount_TXT;
@@ -28,6 +30,14 @@ public class UIManager : MonoBehaviour
     public TMP_Text StonehengeUpgrade2_TXT;
     public TMP_Text StonehengeUpgrade3_TXT;
 
+    public void ActiveTotemUpgrades(bool active)
+    {
+        TotemUpgradeTab.SetActive(active);
+    }
+    public void ActiveStonehengeUpgrades(bool active)
+    {
+        StonehengeUpgradeTab.SetActive(active);
+    }
     public void UpdateResources(float ankhAmount, float woodAmount, float stoneAmount, float spiritAmount, float prestigeAmount)
     {
         int fontSize;

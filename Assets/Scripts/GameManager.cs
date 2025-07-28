@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     }
     void AnkhProduction()
     {
-        ankh += (pyramid / 100) * Time.deltaTime;
+        ankh += (pyramid / 100) * (spirit + 1) * Time.deltaTime;
     }
     void WoodProductions()
     {
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     }
     void SpiritProduction()
     {
-        spirit += (Mathf.Pow(obelisk, prestige) * (1 + ankh * 2)) * Time.deltaTime;
+        spirit += obelisk * 0.001f * prestige * Time.deltaTime;
     }
     public void Prestige()
     {
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
             {
                 if (pyramid == 0)
                     monumentManager.OnPyramidBuild();
-                stone -= GetCost(pyramid, 1.4f, 500);
+                stone -= GetCost(pyramid, 1.4f, 250);
                 wood -= GetCost(pyramid, 1.4f, 500);
                 pyramid++;
             }
@@ -106,7 +106,10 @@ public class GameManager : MonoBehaviour
         if (wood >= GetCost(totem, 2f, 10))
         {
             if (totem == 0)
+            {
+                uiManager.ActiveTotemUpgrades(true);
                 monumentManager.OnTotemBuild();
+            }
             wood -= GetCost(totem, 2f, 10);
             totem++;
         }
@@ -145,7 +148,10 @@ public class GameManager : MonoBehaviour
         if (stone >= GetCost(stonehenge, 2f, 10))
         {
             if (stonehenge == 0)
+            {
+                uiManager.ActiveStonehengeUpgrades(true);
                 monumentManager.OnStoneHengeBuild();
+            }
             stone -= GetCost(stonehenge, 2f, 10);
             stonehenge++;
         }
@@ -206,6 +212,8 @@ public class GameManager : MonoBehaviour
     public void ResetProgress()
     {
         Prestige();
+        uiManager.ActiveStonehengeUpgrades(false);
+        uiManager.ActiveTotemUpgrades(false);
         wood = 0;
         stone = 0;
         ankh = 0;
