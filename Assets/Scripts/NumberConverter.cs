@@ -27,10 +27,10 @@ public class NumberConverter
         else if(number < 1000000000)
         {
             int millions = (int)(number / 1000000);
-            int newNumber = (int)((number - millions) / 10000);
+            int newNumber = (int)((number - millions) / 100);
             if (number > 10000000 && number < 100000000)
             {
-                newNumber /= 100;
+                newNumber /= 10;
                 fontSize = 26;
             }
             else if (number > 100000000)

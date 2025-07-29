@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     #region Production
     public void GatherWood()
     {
-        wood += (totemupgrade1 + 1) / 2 * ( totem + 1 ) *  RollCritChance(totemupgrade3);
+        wood += ((totemupgrade1 + 1) / 2 * ( totem + 1 ) *  RollCritChance(totemupgrade3));
     }
     public void GatherStone()
     {
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
     void WoodProductions()
     {
-        wood += totem * totemupgrade2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime;
+        wood += (totem * totemupgrade2 * RollCritChance(totemupgrade3) * prestige * (1 + ankh)/2 * Time.deltaTime);
     }
     void StoneProduction()
     {
