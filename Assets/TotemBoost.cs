@@ -33,7 +33,7 @@ public class TotemBoost : MonoBehaviour
     {
         LetterSprite.sprite = GetLetterSprite(strategemGame.currentDirection);
         TimeBar.localScale = new Vector3(strategemGame.strategemtime / strategemGame.strategemlimit, 1, 1);
-
+        boostTime = Mathf.Clamp(boostTime - Time.deltaTime, 0, Mathf.Infinity);
         if (!strategemGame.enabled && !canPlaygame)
         {
             rechargeTime += Time.deltaTime;
@@ -67,8 +67,16 @@ public class TotemBoost : MonoBehaviour
     public void BoostResources()
     {
         canPlaygame = false;
-        gameManager.wood += strategemGame.mult;
+        boostTime += strategemGame.mult;
         StrategemUI.color = Color.red;
+    }
+    public bool IsBoosted()
+    {
+        if (boostTime > 0)
+        {
+            return true;
+        }
+        return false;
     }
     public void LevelTwo()
     {

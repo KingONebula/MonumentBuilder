@@ -7,6 +7,7 @@ public class WoodCollectionManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [SerializeField] GameManager gameManager;
+    [SerializeField] TotemBoost totemBoost;
     [SerializeField] GameObject WoodOutline;
     [SerializeField] GameObject StrategemUIObject;
     [SerializeField] Image StrategemUI;
@@ -65,7 +66,10 @@ public class WoodCollectionManager : MonoBehaviour
     public void AddResources()
     {
         canPlaygame = false;
-        gameManager.wood += strategemGame.mult;
+        float boost = 1;
+        if (totemBoost.IsBoosted())
+            boost += 0.5f;
+        gameManager.wood += strategemGame.mult * boost;
         StrategemUI.color = Color.red;
     }
     Sprite GetLetterSprite(int letter)
