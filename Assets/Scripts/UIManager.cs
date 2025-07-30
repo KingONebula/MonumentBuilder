@@ -5,6 +5,8 @@ using System;
 public class UIManager : MonoBehaviour
 {
     public GameManager GameManager;
+    public GameObject TotemUpgradeTab;
+    public GameObject StonehengeUpgradeTab;
     //Resource Amounts
     public TMP_Text AnkhAmount_TXT;
     public TMP_Text WoodAmount_TXT;
@@ -32,27 +34,36 @@ public class UIManager : MonoBehaviour
     public TMP_Text StonehengeUpgrade2_TXT;
     public TMP_Text StonehengeUpgrade3_TXT;
 
+    public void ActiveTotemUpgrades(bool active)
+    {
+        TotemUpgradeTab.SetActive(active);
+    }
+    public void ActiveStonehengeUpgrades(bool active)
+    {
+        StonehengeUpgradeTab.SetActive(active);
+    }
     public void UpdateResources(float ankhAmount, float woodAmount, float stoneAmount, float spiritAmount, float prestigeAmount)
     {
         int fontSize;
         AnkhAmount_TXT.text = NumberConverter.ConvertFloat(ankhAmount, out fontSize);
-        AnkhAmount_TXT.fontSize = fontSize;
+        //AnkhAmount_TXT.fontSize = fontSize;
 
         WoodAmount_TXT.text = NumberConverter.ConvertFloat(woodAmount, out fontSize);
-        WoodAmount_TXT.fontSize = fontSize;
+        //WoodAmount_TXT.fontSize = fontSize;
 
         StoneAmount_TXT.text = NumberConverter.ConvertFloat(stoneAmount, out fontSize);
-        StoneAmount_TXT.fontSize = fontSize;
+        //StoneAmount_TXT.fontSize = fontSize;
 
         SpiritAmount_TXT.text = NumberConverter.ConvertFloat(spiritAmount, out fontSize);
-        SpiritAmount_TXT.fontSize = fontSize;
+        //SpiritAmount_TXT.fontSize = fontSize;
 
         PrestigeAmount_TXT.text = NumberConverter.ConvertFloat(prestigeAmount, out fontSize);
-        PrestigeAmount_TXT.fontSize = fontSize;
+        //PrestigeAmount_TXT.fontSize = fontSize;
     }
 
     public void UpdateGatherAmounts(float totem, float totemupgrade1, float totemupgarde2, float totemupgrade3, float stonehenge, float stonehengeupgrade1, float stonehengeupgrade2, float stonehengeupgrade3, float pyramid, float obelisk, float sundial)
     {
+        return;
         int fontSize;
         #region Gather Resources
         GatherWood_TXT.text = NumberConverter.ConvertFloat((totemupgrade1 + 1) / 2 * (totem + 1), out fontSize);
