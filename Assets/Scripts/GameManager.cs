@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] MilestoneManager milestoneManager;
     //Resources
     float ankh = 0;
-    float wood = 0;
+    public float wood = 0;
     float stone = 0;
     float spirit = 0;
     float prestige = 1;
