@@ -10,9 +10,10 @@ public class StrategemGame : MonoBehaviour
     public float cooldown;
     public float cooldowntime;
     public int currentDirection;
-    public int multStep;
-    public int mult;
-    public int baseMult;
+    public float boost;
+    public float multStep;
+    public float mult;
+    public float baseMult;
     public bool startgame;
     void Start()
     {
@@ -40,7 +41,7 @@ public class StrategemGame : MonoBehaviour
     {
         if (GetInputDirection() == currentDirection)
         {
-            mult += multStep;
+            mult += multStep+boost;
             strategemlimit = Mathf.Clamp(strategemlimit - 0.1f, 0.5f, 2);
             strategemtime = 0;
                 currentDirection = Random.Range((int)0, (int)4);

@@ -53,7 +53,7 @@ public class WoodCollectionManager : MonoBehaviour
             strategemGame.enabled = true;
             StrategemUI.color = Color.white;
             StrategemUIObject.SetActive(true);
-            
+
             WoodOutline.SetActive(false);
         }
 
@@ -61,15 +61,18 @@ public class WoodCollectionManager : MonoBehaviour
         {
             strategemGame.enabled = false;
             StrategemUIObject.SetActive(false);
-        }    
+        }
+        if (totemBoost.IsBoosted())
+        {
+            strategemGame.boost = 0.5f;
+        }
+        else
+            strategemGame.boost = 1;
     }
     public void AddResources()
     {
         canPlaygame = false;
-        float boost = 1;
-        if (totemBoost.IsBoosted())
-            boost += 0.5f;
-        gameManager.wood += strategemGame.mult * boost;
+        gameManager.wood += strategemGame.mult;
         StrategemUI.color = Color.red;
     }
     Sprite GetLetterSprite(int letter)

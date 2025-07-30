@@ -31,38 +31,45 @@ public class TotemBoost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LetterSprite.sprite = GetLetterSprite(strategemGame.currentDirection);
-        TimeBar.localScale = new Vector3(strategemGame.strategemtime / strategemGame.strategemlimit, 1, 1);
-        boostTime = Mathf.Clamp(boostTime - Time.deltaTime, 0, Mathf.Infinity);
-        if (!strategemGame.enabled && !canPlaygame)
+        if (boostTime > 0)
+            gameManager.totemBoost = 2;
+        else
+            gameManager.totemBoost = 1;
+        if (gameManager.totem >= 2)
         {
-            rechargeTime += Time.deltaTime;
-        }
-        if (rechargeTime >= chanceTime)
-        {
-            canPlaygame = true;
-            rechargeTime = 0;
-            chanceTime = Random.Range(chanceMin, chanceMax);
-            WoodOutline.SetActive(true);
-        }
+            LetterSprite.sprite = GetLetterSprite(strategemGame.currentDirection);
+            TimeBar.localScale = new Vector3(strategemGame.strategemtime / strategemGame.strategemlimit, 1, 1);
+            boostTime = Mathf.Clamp(boostTime - Time.deltaTime, 0, Mathf.Infinity);
+            if (!strategemGame.enabled && !canPlaygame)
+            {
+                rechargeTime += Time.deltaTime;
+            }
+            if (rechargeTime >= chanceTime)
+            {
+                canPlaygame = true;
+                rechargeTime = 0;
+                chanceTime = Random.Range(chanceMin, chanceMax);
+                WoodOutline.SetActive(true);
+            }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        if (canPlaygame && hit.collider.tag == "Wood" && Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            strategemGame.enabled = true;
-            StrategemUI.color = Color.white;
-            StrategemUIObject.SetActive(true);
-            
-            WoodOutline.SetActive(false);
-        }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
+            if (canPlaygame && hit.collider.tag == "Totem" && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                strategemGame.enabled = true;
+                StrategemUI.color = Color.white;
+                StrategemUIObject.SetActive(true);
 
-        if (strategemGame.cooldowntime == 0 && !strategemGame.startgame && !canPlaygame)
-        {
-            strategemGame.enabled = false;
-            StrategemUIObject.SetActive(false);
-        }    
+                WoodOutline.SetActive(false);
+            }
+
+            if (strategemGame.cooldowntime == 0 && !strategemGame.startgame && !canPlaygame)
+            {
+                strategemGame.enabled = false;
+                StrategemUIObject.SetActive(false);
+            }
+        }
     }
     public void BoostResources()
     {

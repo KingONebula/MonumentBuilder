@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public float time = 0;
     //Monuments
     float pyramid = 0;
-    float totem = 0;
+    public float totem = 0;
     float totemCollectTime = 0;
     public float totemBoost;
     float stonehenge = 0;
@@ -53,13 +53,14 @@ public class GameManager : MonoBehaviour
         {
             ResetProgress();
         }
+        TotemCollect();
     }
     #region Production
     void TotemCollect()
     {
         if (totem >= 1 && totem < 4)
         {
-            totemCollectTime += Time.deltaTime;
+            totemCollectTime += Time.deltaTime * totemBoost;
             if (totemCollectTime >= 5)
             {
                 wood += Random.Range((int)3, (int)5);
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
         if (totem >= 4)
         {
-            totemCollectTime += Time.deltaTime;
+            totemCollectTime += Time.deltaTime * totemBoost;
             if (totemCollectTime >= 3)
             {
                 wood += Random.Range((int)3, (int)5);
