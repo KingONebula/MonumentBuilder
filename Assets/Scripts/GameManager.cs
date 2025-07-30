@@ -7,10 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     UIManager uiManager;
     [SerializeField] MonumentManager monumentManager;
-    [SerializeField] MilestoneManager milestoneManager;
     //Resources
     float ankh = 0;
-    public float wood = 0;
+    float wood = 0;
     float stone = 0;
     float spirit = 0;
     float prestige = 1;
@@ -31,7 +30,7 @@ public class GameManager : MonoBehaviour
     }
     public float GetCost(float currentAmount, float ramp, float baseCost)
     {
-        return (currentAmount + 1) * baseCost * Mathf.Pow(ramp, currentAmount);
+        return (currentAmount+1) * baseCost * Mathf.Pow(ramp, currentAmount);
     }
     public float RollCritChance(float level)
     {
@@ -85,6 +84,7 @@ public class GameManager : MonoBehaviour
 
         uiManager.ActiveStonehengeUpgrades(false);
         uiManager.ActiveTotemUpgrades(false);
+
         wood = 0;
         stone = 0;
         ankh = 0;
@@ -95,7 +95,5 @@ public class GameManager : MonoBehaviour
         pyramid = 0;
         time = 0;
         monumentManager.OnResetProgress();
-        milestoneManager.CheckMilestone();
     }
-
 }
