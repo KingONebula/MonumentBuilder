@@ -80,8 +80,4 @@ public class WoodCollectionManager : MonoBehaviour
             return DSprite;
         return null;
     }
-    void Game()
-    {
-        
-    }
 }
