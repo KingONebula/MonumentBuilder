@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
         {
             ResetProgress();
         }
+
+        uiManager.UpdateTimer(time);
     }
     #region Production
     void TotemCollect()

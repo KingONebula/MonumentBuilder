@@ -1,6 +1,9 @@
 using UnityEngine;
 using TMPro;
 using System;
+using TMPro.Examples;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,6 +36,9 @@ public class UIManager : MonoBehaviour
     public TMP_Text StonehengeUpgrade1_TXT;
     public TMP_Text StonehengeUpgrade2_TXT;
     public TMP_Text StonehengeUpgrade3_TXT;
+    //Timer
+    public Image SliderKnob_IMG;
+    public Image SliderFill_IMG;
 
     public void ActiveTotemUpgrades(bool active)
     {
@@ -63,7 +69,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGatherAmounts(float totem, float totemupgrade1, float totemupgarde2, float totemupgrade3, float stonehenge, float stonehengeupgrade1, float stonehengeupgrade2, float stonehengeupgrade3, float pyramid, float obelisk, float sundial)
     {
-        return;
         int fontSize;
         #region Gather Resources
         GatherWood_TXT.text = NumberConverter.ConvertFloat((totemupgrade1 + 1) / 2 * (totem + 1), out fontSize);
@@ -95,5 +100,16 @@ public class UIManager : MonoBehaviour
         StonehengeUpgrade2_TXT.text = "" + NumberConverter.ConvertFloat(GameManager.GetCost(stonehengeupgrade2, 1.3f, 60), out fontSize);
         StonehengeUpgrade3_TXT.text = "" + NumberConverter.ConvertFloat(GameManager.GetCost(stonehengeupgrade3, 1.6f, 150), out fontSize);
         #endregion
+    }
+
+    public void UpdateTimer(float currentTime)
+    {
+        float maxTime = 600;
+        float timePercent = (currentTime / maxTime);
+        Vector2 newMaxAnchor = new Vector2(timePercent, 1);
+        Vector2 newMinAnchor = new Vector2(timePercent, 0);
+        SliderKnob_IMG.rectTransform.anchorMax = newMaxAnchor;
+        SliderKnob_IMG.rectTransform.anchorMin = newMinAnchor;
+        SliderFill_IMG.rectTransform.anchorMax = newMaxAnchor;
     }
 }
