@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
     public float wood = 0;
     public float stone = 0;
     float spirit = 0;
-    float prestige = 1;
-    public float time = 0;
+    float prestige = 0;
     //Monuments
     public float pyramid = 0;
     float ankhcollecttime = 0;
@@ -48,12 +47,6 @@ public class GameManager : MonoBehaviour
 
         uiManager.UpdateResources(ankh, wood, stone, spirit, prestige);
         //uiManager.UpdateGatherAmounts(totem, totemupgrade1, totemupgrade2, totemupgrade3, stonehenge, stonehengeupgrade1, stonehengeupgrade2, stonehengeupgrade3, pyramid, obelisk, sundial);
-
-        time += Time.deltaTime;
-        if (time > 600)
-        {
-            ResetProgress();
-        }
         TotemCollect();
         StoneCollect();
         AnkhCollection();
@@ -132,21 +125,4 @@ public class GameManager : MonoBehaviour
     #region TryBuy
 
     #endregion
-    public void ResetProgress()
-    {
-
-        uiManager.ActiveStonehengeUpgrades(false);
-        uiManager.ActiveTotemUpgrades(false);
-        wood = 0;
-        stone = 0;
-        ankh = 0;
-        spirit = 0;
-        totem = 0;
-        stonehenge = 0;
-        pyramid = 0;
-        time = 0;
-        monumentManager.OnResetProgress();
-        milestoneManager.CheckMilestone();
-    }
-
 }
