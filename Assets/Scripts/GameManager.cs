@@ -7,14 +7,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     UIManager uiManager;
     [SerializeField] MonumentManager monumentManager;
-    [SerializeField] MilestoneManager milestoneManager;
+    public MilestoneManager milestoneManager;
     [SerializeField] PyramidBoost PyramidBoost;
     //Resources
-    float ankh = 0;
+    public float ankh = 0;
     public float wood = 0;
     public float stone = 0;
     float spirit = 0;
-    float prestige = 0;
+    public float prestige = 0;
     //Monuments
     public float pyramid = 0;
     float ankhcollecttime = 0;

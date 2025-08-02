@@ -17,7 +17,7 @@ public class PyramidUpgrade : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        if (hit.collider.tag == "Totem")
+        if (hit.collider != null && hit.collider.tag == "Pyramid")
         {
             costUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -40,15 +40,16 @@ public class PyramidUpgrade : MonoBehaviour
     }
     public void TryBuyLevelOne()
     {
-        if (gameManager.wood > 15)
+        if (gameManager.stone >= 15)
         {
+            gameManager.milestoneManager.MilestoneThree();
             gameManager.pyramid++;
             totem_1.SetActive(true);
         }
     }
     public void TryBuyLevelTwo()
     {
-        if (gameManager.wood > 25)
+        if (gameManager.stone >= 35 && gameManager.ankh >= 15)
         {
             gameManager.pyramid++;
             totem_2.SetActive(true);
@@ -57,7 +58,7 @@ public class PyramidUpgrade : MonoBehaviour
     }
     public void TryBuyLevelThree()
     {
-        if (gameManager.wood > 40)
+        if (gameManager.wood > 40 && gameManager.stone >= 100 && gameManager.ankh >= 30)
         {
             gameManager.pyramid++;
             totem_3.SetActive(true);
@@ -66,7 +67,7 @@ public class PyramidUpgrade : MonoBehaviour
     }
     public void TryBuyLevelFour()
     {
-        if (gameManager.wood > 75)
+        if (gameManager.wood > 75 && gameManager.stone >= 130 && gameManager.ankh >= 50)
         {
             gameManager.pyramid++;
             totem_4.SetActive(true);

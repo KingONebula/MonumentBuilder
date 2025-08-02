@@ -16,7 +16,7 @@ public class Stoneupgrade : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        if (hit.collider.tag == "Totem")
+        if (hit.collider != null && hit.collider.tag == "Stone")
         {
             costUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -35,15 +35,16 @@ public class Stoneupgrade : MonoBehaviour
     }
     public void TryBuyLevelOne()
     {
-        if (gameManager.stone > 15)
+        if (gameManager.wood >= 70)
         {
             gameManager.stonehenge++;
+            gameManager.milestoneManager.MilestoneTwo();
             totem_1.SetActive(true);
         }
     }
     public void TryBuyLevelTwo()
     {
-        if (gameManager.stone > 25)
+        if (gameManager.stone >= 40 && gameManager.wood >= 100)
         {
             gameManager.stonehenge++;
             totem_2.SetActive(true);

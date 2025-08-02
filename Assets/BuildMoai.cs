@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildMoai : MonoBehaviour
@@ -16,7 +17,7 @@ public class BuildMoai : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        if (hit.collider.tag == "Totem")
+        if (hit.collider != null && hit.collider.tag == "Moai")
         {
             costUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -32,9 +33,10 @@ public class BuildMoai : MonoBehaviour
     }
     public void TryBuyLevelOne()
     {
-        if (gameManager.wood > 15)
+        if (gameManager.wood >= 200 && gameManager.stone >= 150 && gameManager.ankh == 75)
         {
             gameManager.moyai++;
+            gameManager.milestoneManager.MilestoneFour();
             totem_1.SetActive(true);
         }
     }

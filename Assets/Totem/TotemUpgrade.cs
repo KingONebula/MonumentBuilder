@@ -17,7 +17,7 @@ public class TotemUpgrade : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        if (hit.collider.tag == "Totem")
+        if (hit.collider != null && hit.collider.tag == "Totem")
         {
             costUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -40,15 +40,16 @@ public class TotemUpgrade : MonoBehaviour
     }
     public void TryBuyLevelOne()
     {
-        if (gameManager.wood > 15)
+        if (gameManager.wood >= 15)
         {
             gameManager.totem++;
             totem_1.SetActive(true);
+            gameManager.milestoneManager.Milestone();
         }
     }
     public void TryBuyLevelTwo()
     {
-        if (gameManager.wood > 25)
+        if (gameManager.wood >= 35)
         {
             gameManager.totem++;
             totem_2.SetActive(true);
@@ -57,7 +58,7 @@ public class TotemUpgrade : MonoBehaviour
     }
     public void TryBuyLevelThree()
     {
-        if (gameManager.wood > 40)
+        if (gameManager.wood >= 50)
         {
             gameManager.totem++;
             totem_3.SetActive(true);
@@ -66,7 +67,7 @@ public class TotemUpgrade : MonoBehaviour
     }
     public void TryBuyLevelFour()
     {
-        if (gameManager.wood > 75)
+        if (gameManager.wood >= 150)
         {
             gameManager.totem++;
             totem_4.SetActive(true);
