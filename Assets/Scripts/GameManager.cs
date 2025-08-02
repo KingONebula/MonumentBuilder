@@ -8,23 +8,24 @@ public class GameManager : MonoBehaviour
     UIManager uiManager;
     [SerializeField] MonumentManager monumentManager;
     [SerializeField] MilestoneManager milestoneManager;
+    [SerializeField] PyramidBoost PyramidBoost;
     //Resources
     float ankh = 0;
     public float wood = 0;
-    float stone = 0;
+    public float stone = 0;
     float spirit = 0;
     float prestige = 1;
     public float time = 0;
     //Monuments
-    float pyramid = 0;
+    public float pyramid = 0;
+    float ankhcollecttime = 0;
     public float totem = 0;
     float totemCollectTime = 0;
     public float totemBoost;
-    float stonehenge = 0;
-    float stonehengeupgrade1 = 0, stonehengeupgrade2 = 0, stonehengeupgrade3 = 0;
-    float obelisk = 0;
-    float sundial = 0;
-    float moyai = 0;
+    public float stonehenge = 0;
+    float stonehengeCollectTime;
+    public float stonehengeBoost;
+    public float moyai = 0;
     void Start()
     {
 
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
             ResetProgress();
         }
         TotemCollect();
+        StoneCollect();
+        AnkhCollection();
     }
     #region Production
     void TotemCollect()
@@ -77,6 +80,54 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    void StoneCollect()
+    {
+        float ankhboost = 0;
+        if (PyramidBoost.IsBoosted())
+            ankhboost = 2;
+        if (stonehenge >= 1 && stonehenge < 2)
+            {
+                stonehengeCollectTime += Time.deltaTime * stonehengeBoost;
+                if (stonehengeCollectTime >= 5)
+                {
+                    stone += Random.Range((int)3, (int)6) + ankhboost;
+                    stonehengeCollectTime = 0;
+                }
+            }
+        if (stonehenge >= 2)
+        {
+            stonehengeCollectTime += Time.deltaTime * stonehengeBoost;
+            if (stonehengeCollectTime >= 3)
+            {
+                stone += Random.Range((int)3, (int)6) + ankhboost;
+                stonehengeCollectTime = 0;
+            }
+        }
+    }
+    void AnkhCollection()
+    {
+        float ankhboost = 0;
+        if (PyramidBoost.IsBoosted())
+            ankhboost = 5;
+        if (pyramid >= 1 && pyramid < 4)
+        {
+            ankhcollecttime += Time.deltaTime * totemBoost;
+            if (ankhcollecttime >= 5)
+            {
+                ankh += Random.Range((int)1, (int)3)+ ankhboost;
+                ankhcollecttime = 0;
+            }
+        }
+        if (pyramid >= 4)
+        {
+            ankhcollecttime += Time.deltaTime * totemBoost;
+            if (ankhcollecttime >= 3)
+            {
+                ankh += Random.Range((int)1, (int)3)+ankhboost;
+                ankhcollecttime = 0;
+            }
+        }
+    }
     #endregion
     #region TryBuy
 
@@ -92,7 +143,6 @@ public class GameManager : MonoBehaviour
         spirit = 0;
         totem = 0;
         stonehenge = 0;
-        obelisk = 0;
         pyramid = 0;
         time = 0;
         monumentManager.OnResetProgress();
