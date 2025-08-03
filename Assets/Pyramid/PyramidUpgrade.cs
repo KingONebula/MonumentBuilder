@@ -6,6 +6,7 @@ public class PyramidUpgrade : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject totem_1, totem_2, totem_3, totem_4;
     [SerializeField] GameObject costUI;
+    [SerializeField] PyramidBoost pyramidBoost;
     void Start()
     {
 
@@ -42,6 +43,7 @@ public class PyramidUpgrade : MonoBehaviour
     {
         if (gameManager.stone >= 15)
         {
+            gameManager.stone -= 15;
             gameManager.milestoneManager.MilestoneThree();
             gameManager.pyramid++;
             totem_1.SetActive(true);
@@ -51,6 +53,9 @@ public class PyramidUpgrade : MonoBehaviour
     {
         if (gameManager.stone >= 35 && gameManager.ankh >= 15)
         {
+            pyramidBoost.LevelTwo();
+            gameManager.stone -= 35;
+            gameManager.ankh -= 15;
             gameManager.pyramid++;
             totem_2.SetActive(true);
             totem_1.SetActive(false);
@@ -61,6 +66,10 @@ public class PyramidUpgrade : MonoBehaviour
         if (gameManager.wood > 40 && gameManager.stone >= 100 && gameManager.ankh >= 30)
         {
             gameManager.pyramid++;
+            gameManager.wood -= 40;
+            pyramidBoost.LevelThree();
+            gameManager.stone -= 100;
+            gameManager.ankh -= 30;
             totem_3.SetActive(true);
             totem_2.SetActive(false);
         }
@@ -70,6 +79,9 @@ public class PyramidUpgrade : MonoBehaviour
         if (gameManager.wood > 75 && gameManager.stone >= 130 && gameManager.ankh >= 50)
         {
             gameManager.pyramid++;
+            gameManager.wood -= 75;
+            gameManager.stone -= 130;
+            gameManager.ankh -= 50;
             totem_4.SetActive(true);
             totem_3.SetActive(false);
         }

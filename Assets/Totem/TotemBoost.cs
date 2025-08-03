@@ -55,7 +55,7 @@ public class TotemBoost : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             Physics.Raycast(ray, out hit);
-            if (canPlaygame && hit.collider.tag == "Totem" && Input.GetKeyDown(KeyCode.Mouse0))
+            if (hit.collider != null && canPlaygame && hit.collider.tag == "Totem" && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 strategemGame.enabled = true;
                 StrategemUI.color = Color.white;

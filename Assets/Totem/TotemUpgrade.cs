@@ -6,6 +6,7 @@ public class TotemUpgrade : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] GameObject totem_1, totem_2, totem_3, totem_4;
     [SerializeField] GameObject costUI;
+    [SerializeField] TotemBoost totemBoost;
     void Start()
     {
 
@@ -43,6 +44,7 @@ public class TotemUpgrade : MonoBehaviour
         if (gameManager.wood >= 15)
         {
             gameManager.totem++;
+            gameManager.wood -= 15;
             totem_1.SetActive(true);
             gameManager.milestoneManager.Milestone();
         }
@@ -52,17 +54,21 @@ public class TotemUpgrade : MonoBehaviour
         if (gameManager.wood >= 35)
         {
             gameManager.totem++;
+            gameManager.wood -= 35;
             totem_2.SetActive(true);
             totem_1.SetActive(false);
+            totemBoost.LevelTwo();
         }
     }
     public void TryBuyLevelThree()
     {
         if (gameManager.wood >= 50)
         {
+            gameManager.wood -= 50;
             gameManager.totem++;
             totem_3.SetActive(true);
             totem_2.SetActive(false);
+            totemBoost.LevelThree();
         }
     }
     public void TryBuyLevelFour()
@@ -70,6 +76,7 @@ public class TotemUpgrade : MonoBehaviour
         if (gameManager.wood >= 150)
         {
             gameManager.totem++;
+            gameManager.wood -= 150;
             totem_4.SetActive(true);
             totem_3.SetActive(false);
         }

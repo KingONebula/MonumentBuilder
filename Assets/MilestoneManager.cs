@@ -12,7 +12,12 @@ public class MilestoneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            milestoneone.SetActive(false);
+            mtwo.SetActive(false);
+            mthree.SetActive(false);
+        }
     }
     public void Milestone()
     {

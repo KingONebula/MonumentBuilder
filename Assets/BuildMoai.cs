@@ -23,7 +23,11 @@ public class BuildMoai : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (gameManager.moyai == 0)
-                    TryBuyLevelOne();   
+                {
+                    TryBuyLevelOne();
+                    Debug.Log("Try Buy Moyai");
+                }
+                     
             }
         }
         else
@@ -33,9 +37,12 @@ public class BuildMoai : MonoBehaviour
     }
     public void TryBuyLevelOne()
     {
-        if (gameManager.wood >= 200 && gameManager.stone >= 150 && gameManager.ankh == 75)
+        if (gameManager.wood >= 200 && gameManager.stone >= 150 && gameManager.ankh >= 75)
         {
             gameManager.moyai++;
+            gameManager.wood -= 200;
+            gameManager.stone -= 150;
+            gameManager.ankh -= 75;
             gameManager.milestoneManager.MilestoneFour();
             totem_1.SetActive(true);
         }
